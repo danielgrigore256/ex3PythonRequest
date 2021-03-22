@@ -4,48 +4,70 @@ class Jokes():
     """
     Class that creates json file from jokepage
     """
-    def __init__(self,link):
+    def __init__(self, endpoint):
         """
         creates a json file from 10 random jokes
-        :param link: the joke(s) link
+        :param endpoint: type of joke wanted (single joke/ 10 random jokes)
         :return a json dictionary with jokes
         """
-
+        link = f"https://official-joke-api.appspot.com/jokes/{endpoint}"
         joke_response = requests.get(link)
         self.joke = joke_response.json()
 
-    def print_joke(self, index):
+    def print_joke(self):
         """
-        Prints the contents of the joke from the json file
+        Method to print only one joke
+        :return: printing the attributes of the joke
+        """
+        print("""
+                        JokeID : {}
+                        Intro: {} 
+                        Punch line : {}""".format(self.joke["id"],
+                                                  self.joke["setup"],
+                                                  self.joke['punchline']))
+
+    def print_jokes(self, index):
+        """
+        Prints the contents of the jokes from the json file (used for 10 jokes)
         :param index: the position of joke ( we got 10 jokes in each json)
         :return: print of the joke
         """
-        print("Intro : ", self.joke[index]["setup"])
-        print("Punch line : ", self.joke[index]['punchline'])
+        print("""
+                JokeID : {}
+                Intro: {} 
+                Punch line : {}""".format(self.joke[index]["id"],
+                                          self.joke[index]["setup"],
+                                          self.joke[index]['punchline']))
 
-    def check_if_same_type(self):
+    def check_if_same_type(self, type):
         """
         checking if the jokes are same type (programming , general )
-        :return: True if same type // False + error message if not same type
+        :param type: the type you need to be compared to
+        :return: error message if not same type
         """
-
-        j = self.joke[0]["type"]
         for i in self.joke:
-            if i["type"] != j:
-                return False
-                print("Error, not same type")
+            if i["type"] != type:
+                print(f"Error, not same type as {type} ")
+                break
         else:
-                return True
+            print(f"All ten random jokes are same type, {type} !")
 
-    def display_jokes_by_even_id(self):
+
+    def display_jokes_by_id_parity(self, parity):
         """
         function to display jokes by the parity of the id field
         :return: printing the coresponding jokes
         """
-        index = 0
-        for i in self.joke:
-            if int(i["id"]) % 2:
-                self.print_joke(index)
-            index += 1
+        pun_index = 0
+        if parity == "even":
+            for pun in self.joke:
+                if int(pun["id"]) % 2 == 0:
+                    self.print_jokes(pun_index)
+                pun_index += 1
+        elif parity == "odd":
+            for pun in self.joke:
+                if int(pun["id"])%2 !=0:
+                    self.print_jokes(pun_index)
+                pun_index += 1
 
 
