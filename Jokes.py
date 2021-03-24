@@ -21,20 +21,18 @@ class Jokes:
         :param index: the position of joke ( we got 10 jokes in each json)
         :return: print of the joke
         """
-        if isinstance(self.joke, dict):
+        def display_jokes(joke_id, setup, punchline):
             print("""
                     JokeID : {}
                     Intro: {} 
-                    Punch line : {}""".format(self.joke["id"],
-                                              self.joke["setup"],
-                                              self.joke['punchline']))
+                    Punch line : {}""".format(joke_id, setup, punchline))
+
+        if isinstance(self.joke, dict):
+            display_jokes(self.joke["id"], self.joke["setup"], self.joke['punchline'])
         else:
-            print("""
-                  JokeID : {}
-                  Intro: {} 
-                  Punch line : {}""".format(self.joke[index]["id"],
-                                            self.joke[index]["setup"],
-                                            self.joke[index]['punchline']))
+            display_jokes(self.joke[index]["id"],
+                          self.joke[index]["setup"],
+                          self.joke[index]['punchline'])
 
     def check_if_same_type(self, joke_type):
         """

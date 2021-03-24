@@ -76,16 +76,19 @@ def generate_ten_by_type(joke_type):
 
 # this is when Main input interface starts
 while True:
-    check = input(""" Hello, what joke do you want ? 
-                    (1) Single joke
-                    (2) Ten Random Jokes""")
-    if check == "1":
-        single_joke = Jokes("random")
-        print("Here is your joke:")
-        single_joke.print_jokes(0)
-        break
-    elif check == "2":
-        ten_joke_menu()
-        break
-    else:
-        print("Wrong number, let's try again")
+    try:
+        check = input(""" Hello, what joke do you want ? 
+                        (1) Single joke
+                        (2) Ten Random Jokes""")
+        if check == "1":
+            single_joke = Jokes("random")
+            print("Here is your joke:")
+            single_joke.print_jokes(0)
+            break
+        elif check == "2":
+            ten_joke_menu()
+            break
+        else:
+            raise ValueError
+    except:
+        print("try again")
