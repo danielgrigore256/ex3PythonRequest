@@ -15,24 +15,34 @@ class Jokes:
         joke_response = requests.get(link)
         self.joke = joke_response.json()
 
-    def print_jokes(self, index):
+    @staticmethod
+    def print_content(jokeid, setup, punchline):
+        """
+        Method to print on console the joke's attributes
+
+        :return: joke id, and actual joke
+        """
+        print("""
+                JokeID : {}
+                Intro: {} 
+                Punch line : {}""".format(jokeid, setup, punchline))
+
+    def display_jokes(self, index):
         """
         Prints the contents of the jokes from the json file
         :param index: the position of joke ( we got 10 jokes in each json)
         :return: print of the joke
         """
-        def display_jokes(joke_id, setup, punchline):
-            print("""
-                    JokeID : {}
-                    Intro: {} 
-                    Punch line : {}""".format(joke_id, setup, punchline))
 
         if isinstance(self.joke, dict):
-            display_jokes(self.joke["id"], self.joke["setup"], self.joke['punchline'])
+            Jokes.print_content(self.joke["id"], self.joke["setup"], self.joke['punchline'])
         else:
-            display_jokes(self.joke[index]["id"],
-                          self.joke[index]["setup"],
-                          self.joke[index]['punchline'])
+            Jokes.print_content(self.joke[index]["id"],
+                                self.joke[index]["setup"],
+                                self.joke[index]['punchline'])
+
+
+
 
     def check_if_same_type(self, joke_type):
         """
@@ -56,10 +66,10 @@ class Jokes:
         if parity == "even":
             for pun in self.joke:
                 if int(pun["id"]) % 2 == 0:
-                    self.print_jokes(pun_index)
+                    self.display_jokes(pun_index)
                 pun_index += 1
         elif parity == "odd":
             for pun in self.joke:
                 if int(pun["id"]) % 2 != 0:
-                    self.print_jokes(pun_index)
+                    self.display_jokes(pun_index)
                 pun_index += 1

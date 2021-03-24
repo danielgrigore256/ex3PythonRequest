@@ -56,7 +56,7 @@ def generate_ten_random():
         else:
             if display_check == 1:
                 for ten_check_index in range(len(ten_random_jokes.joke)):
-                    ten_random_jokes.print_jokes(ten_check_index)
+                    ten_random_jokes.display_jokes(ten_check_index)
                 break
             if display_check == 2:
                 ten_random_jokes.display_jokes_by_id_parity("even")
@@ -81,7 +81,7 @@ def generate_ten_by_type(joke_type):
         else:
             if type_check == 1:
                 for ten_check_index in range(len(ten_random_jokes_type.joke)):
-                    ten_random_jokes_type.print_jokes(ten_check_index)
+                    ten_random_jokes_type.display_jokes(ten_check_index)
                 break
             if type_check == 2:
                 ten_random_jokes_type.check_if_same_type(joke_type)
@@ -102,7 +102,7 @@ while True:
         if check == 1:
             single_joke = Jokes("random")
             print("Here is your joke:")
-            single_joke.print_jokes(0)
+            single_joke.display_jokes(0)
             break
         elif check == 2:
             ten_joke_menu()
