@@ -3,6 +3,24 @@ from Jokes import Jokes
 
 
 # function menu to generate 10 jokes
+def select_type():
+    while True:
+        try:
+            ten_by_type_check = int(input("""What type you want ?
+                                        (1) Programming
+                                        (2) General"""))
+        except ValueError:
+            print("you didnt entered a number")
+        else:
+            if ten_by_type_check == 1:
+                generate_ten_by_type("programming")
+                break
+
+            if ten_by_type_check == 2:
+                generate_ten_by_type("general")
+                break
+            else:
+                print("Not a valid choice, please try again")
 def ten_joke_menu():
     while True:
         try:
@@ -18,24 +36,7 @@ def ten_joke_menu():
                 break
 
             elif ten_check == 2:
-
-                while True:
-                    try:
-                        ten_by_type_check = int(input("""What type you want ?
-                                                    (1) Programming
-                                                    (2) General"""))
-                    except ValueError:
-                        print("you didnt entered a number")
-                    else:
-                        if ten_by_type_check == 1:
-                            generate_ten_by_type("programming")
-                            break
-
-                        if ten_by_type_check == 2:
-                            generate_ten_by_type("general")
-                            break
-                        else:
-                            print("Not a valid choice, please try again")
+                select_type()
                 break
             else:
                 print("Not a valid choice, please try again")
