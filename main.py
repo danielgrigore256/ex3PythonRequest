@@ -26,7 +26,13 @@ def ten_joke_menu():
                 if ten_by_type_check == "2":
                     generate_ten_by_type("general")
                     break
+                else:
+                    print("Wrong number, let's try again")
             break
+        else:
+            print("Wrong number, let's try again")
+
+
 # function menu to generate 10 random jokes
 def generate_ten_random():
     ten_random_jokes = Jokes("ten")
@@ -46,11 +52,13 @@ def generate_ten_random():
         if display_check == "3":
             ten_random_jokes.display_jokes_by_id_parity("odd")
             break
+        else:
+            print("Wrong number, let's try again")
 
 
 # function to generate Ten random jokes by type
-def generate_ten_by_type(type):
-    ten_random_jokes_type = Jokes(f"{type}/ten")
+def generate_ten_by_type(joke_type):
+    ten_random_jokes_type = Jokes(f"{joke_type}/ten")
     while True:
         type_check = input("""Do you want them ?
                                         (1)printed
@@ -60,8 +68,10 @@ def generate_ten_by_type(type):
                 ten_random_jokes_type.print_jokes(ten_check_index)
             break
         if type_check == "2":
-            ten_random_jokes_type.check_if_same_type(type)
+            ten_random_jokes_type.check_if_same_type(joke_type)
             break
+        else:
+            print("Wrong number, let's try again")
 
 
 # this is when Main input interface starts
@@ -72,10 +82,10 @@ while True:
     if check == "1":
         single_joke = Jokes("random")
         print("Here is your joke:")
-        single_joke.print_joke()
+        single_joke.print_jokes(0)
         break
     elif check == "2":
         ten_joke_menu()
         break
-
-
+    else:
+        print("Wrong number, let's try again")
